@@ -1,11 +1,14 @@
 package com.xcv58.spec;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.xcv58.spec.scimark2.commandline;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -13,10 +16,31 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        commandline.main(new String[0]);
         setContentView(R.layout.activity_main);
+        this.prepareButtons(this);
+//        commandline.main(new String[0]);
     }
 
+    private boolean prepareButtons(Context context) {
+        LinearLayout mainLayout = (LinearLayout) findViewById(R.id.main);
+        for (String method : Utils.MEASURE_METHODS) {
+            Button button = new Button(this);
+            button.setText(method);
+            button.setOnClickListener(onClickListenerForButton);
+            mainLayout.addView(button);
+        }
+        return true;
+    }
+
+    private View.OnClickListener onClickListenerForButton = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Button button = (Button) view;
+            String method = button.getText().toString();
+            double result = Utils.measure(method);
+            Toast.makeText(view.getContext(), method + ": " + result, Toast.LENGTH_SHORT).show();
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
