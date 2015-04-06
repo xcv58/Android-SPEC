@@ -18,7 +18,13 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.prepareButtons(this);
-//        commandline.main(new String[0]);
+        Bundle extras = this.getIntent().getExtras();
+        if (extras != null) {
+            for (String key : extras.keySet()) {
+                String value = extras.getString(key);
+                Toast.makeText(this, key + ": " + value, Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private boolean prepareButtons(Context context) {
