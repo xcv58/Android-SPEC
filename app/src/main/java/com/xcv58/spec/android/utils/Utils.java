@@ -1,4 +1,4 @@
-package com.xcv58.spec;
+package com.xcv58.spec.android.utils;
 
 import com.xcv58.spec.scimark2.Constants;
 import com.xcv58.spec.scimark2.Random;
@@ -8,6 +8,8 @@ import com.xcv58.spec.scimark2.kernel;
  * Created by xcv58 on 4/6/15.
  */
 public class Utils {
+    public static final String TAG = "SPEC_ANDROID";
+
     public static final String measureFFT = "measureFFT";
     public static final String measureSOR = "measureSOR";
     public static final String measureMonteCarlo = "measureMonteCarlo";

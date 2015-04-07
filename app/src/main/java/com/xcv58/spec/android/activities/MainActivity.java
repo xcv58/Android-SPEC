@@ -1,6 +1,7 @@
-package com.xcv58.spec;
+package com.xcv58.spec.android.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -9,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.xcv58.spec.R;
+import com.xcv58.spec.android.utils.Utils;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -43,10 +47,19 @@ public class MainActivity extends ActionBarActivity {
         public void onClick(View view) {
             Button button = (Button) view;
             String method = button.getText().toString();
-            double result = Utils.measure(method);
-            Toast.makeText(view.getContext(), method + ": " + result, Toast.LENGTH_SHORT).show();
+            sendIntent(view.getContext(), method);
+//            double result = Utils.measure(method);
+//            Toast.makeText(view.getContext(), method + ": " + result, Toast.LENGTH_SHORT).show();
         }
     };
+
+    private void sendIntent(Context context, String method) {
+//        Intent intent = new Intent(context, SPECIntentService.class);
+//        intent.setAction(method);
+//        startService(intent);
+        Intent intent = new Intent("com.xcv58.spec.intentservice");
+        startService(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

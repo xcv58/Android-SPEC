@@ -10,7 +10,12 @@
 # Success
 
 
-# Launching application: com.xcv58.spec/com.xcv58.spec.MainActivity.
+# Launching application: com.xcv58.spec/com.xcv58.spec.android.activities.MainActivity.
 # DEVICE SHELL COMMAND:
-adb shell am start -n "com.xcv58.spec/com.xcv58.spec.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -e hello_key hello_value
+
+# adb shell am start -n "com.xcv58.spec/com.xcv58.spec.android.activities.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -e hello_key hello_value
+
+# adb shell am broadcast -a com.whereismywifeserver.intent.TEST --es sms_body "test from adb" -n com.whereismywifeserver/.IntentReceiver
+adb shell am startservice -a "com.xcv58.spec.intentservice"
+
 # Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.xcv58.spec/.MainActivity }
