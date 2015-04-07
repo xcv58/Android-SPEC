@@ -58,6 +58,7 @@ public class MainActivity extends ActionBarActivity {
 //        intent.setAction(method);
 //        startService(intent);
         Intent intent = new Intent("com.xcv58.spec.intentservice");
+        intent.putExtra("method", method);
         startService(intent);
     }
 
