@@ -3,6 +3,7 @@ package com.xcv58.spec.android.services;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.xcv58.spec.android.utils.Utils;
@@ -63,6 +64,23 @@ public class SPECIntentService extends IntentService {
         if (intent != null) {
             final String action = intent.getAction();
             Log.d(Utils.TAG, action);
+            Bundle bundle = intent.getExtras();
+            if (bundle != null) {
+                for (String key : bundle.keySet()) {
+                    Log.d(Utils.TAG, key + ": " + bundle.getString(key));
+                }
+            }
+            long startTime = System.currentTimeMillis();
+            while (true) {
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (System.currentTimeMillis() - startTime > 5000) {
+                    break;
+                }
+            }
             if (ACTION_FOO.equals(action)) {
                 final String param1 = intent.getStringExtra(EXTRA_PARAM1);
                 final String param2 = intent.getStringExtra(EXTRA_PARAM2);
