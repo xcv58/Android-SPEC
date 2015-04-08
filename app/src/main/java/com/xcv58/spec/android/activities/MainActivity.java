@@ -48,8 +48,8 @@ public class MainActivity extends ActionBarActivity {
             Button button = (Button) view;
             String method = button.getText().toString();
             sendIntent(view.getContext(), method);
-//            double result = Utils.measure(method);
-//            Toast.makeText(view.getContext(), method + ": " + result, Toast.LENGTH_SHORT).show();
+            double result = Utils.measure(method);
+            Toast.makeText(view.getContext(), method + ": " + result, Toast.LENGTH_SHORT).show();
         }
     };
 
