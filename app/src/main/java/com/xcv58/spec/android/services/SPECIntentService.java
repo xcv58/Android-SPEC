@@ -39,16 +39,35 @@ public class SPECIntentService extends IntentService {
                         Utils.debug(START);
                         if (CONTINUE) {
                             // TODO: already running, update task
+                            this.updateTask();
                         } else {
                             // TODO: make something running
                             CONTINUE = true;
+                            this.start();
                         }
                     } else if (STOP.equals(key)) {
                         Utils.debug(STOP);
                         CONTINUE = false;
+                        this.stop();
                     }
                 }
             }
         }
+    }
+
+    private void updateTask() {
+
+    }
+
+    private void start() {
+        Utils.debug("start() start");
+//        benchmarkTask.execute();
+//        benchmarkTask.doInBackground(null);
+        Utils.start();
+        Utils.debug("start() end");
+    }
+
+    private void stop() {
+        Utils.stop();
     }
 }

@@ -1,7 +1,9 @@
 package com.xcv58.spec.android.utils;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
+import com.xcv58.spec.android.services.SPECIntentService;
 import com.xcv58.spec.scimark2.Constants;
 import com.xcv58.spec.scimark2.Random;
 import com.xcv58.spec.scimark2.kernel;
@@ -72,5 +74,30 @@ public class Utils {
 
     public static void debug(String string) {
         if (DEBUG) {  Log.d(TAG, string); }
+    }
+
+    private static class BenchmarkTask extends AsyncTask {
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            while (SPECIntentService.CONTINUE) {
+                double result = Utils.measure(Utils.measureFFT);
+                Utils.debug("result: " + result);
+            }
+            return null;
+        }
+    }
+
+    private static BenchmarkTask benchmarkTask = new BenchmarkTask();
+
+    public static void start() {
+        benchmarkTask = new BenchmarkTask();
+        benchmarkTask.execute();
+    }
+
+    public static void stop() {
+        while (!benchmarkTask.isCancelled()) {
+            benchmarkTask.cancel(true);
+            Utils.debug("isCanceled: " + benchmarkTask.isCancelled());
+        }
     }
 }
