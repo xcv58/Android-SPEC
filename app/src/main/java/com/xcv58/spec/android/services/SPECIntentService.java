@@ -15,6 +15,12 @@ import com.xcv58.spec.android.utils.Utils;
  * helper methods.
  */
 public class SPECIntentService extends IntentService {
+    public static final String STOP = "STOP";
+    public static final String START = "START";
+
+    public static boolean CONTINUE = false;
+    public static String task;
+
     public SPECIntentService() {
         super("SPECIntentService");
     }
@@ -24,10 +30,23 @@ public class SPECIntentService extends IntentService {
         if (intent != null) {
             final String action = intent.getAction();
             Log.d(Utils.TAG, action);
+            Utils.debug("receive " + action);
             Bundle bundle = intent.getExtras();
             if (bundle != null) {
                 for (String key : bundle.keySet()) {
-                    Log.d(Utils.TAG, key + ": " + bundle.getString(key));
+                    Utils.debug(key + ": " + bundle.getString(key));
+                    if (START.equals(key)) {
+                        Utils.debug(START);
+                        if (CONTINUE) {
+                            // TODO: already running, update task
+                        } else {
+                            // TODO: make something running
+                            CONTINUE = true;
+                        }
+                    } else if (STOP.equals(key)) {
+                        Utils.debug(STOP);
+                        CONTINUE = false;
+                    }
                 }
             }
         }

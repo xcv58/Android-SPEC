@@ -1,5 +1,7 @@
 package com.xcv58.spec.android.utils;
 
+import android.util.Log;
+
 import com.xcv58.spec.scimark2.Constants;
 import com.xcv58.spec.scimark2.Random;
 import com.xcv58.spec.scimark2.kernel;
@@ -8,6 +10,7 @@ import com.xcv58.spec.scimark2.kernel;
  * Created by xcv58 on 4/6/15.
  */
 public class Utils {
+    public static final boolean DEBUG = true;
     public static final String TAG = "SPEC_ANDROID";
 
     public static final String measureFFT = "measureFFT";
@@ -65,5 +68,9 @@ public class Utils {
         }
 //        System.out.println("SciMark 2.0a");
         return result;
+    }
+
+    public static void debug(String string) {
+        if (DEBUG) {  Log.d(TAG, string); }
     }
 }
